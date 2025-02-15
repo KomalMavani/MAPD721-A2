@@ -36,6 +36,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.ui.graphics.Color
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.CardDefaults
@@ -180,8 +181,11 @@ fun HealthConnectApp(healthConnectClient: HealthConnectClient) {
                 .weight(1f)
                 .fillMaxWidth()
         ) {
-            items(readings) { reading ->
-                HeartRateItem(reading)
+            itemsIndexed(readings) { index, reading ->
+                // Alternate colors based on even or odd index
+                val backgroundColor = if (index % 2 == 0) Color(0xFFFFF176) else Color(0xFFA5D6A7) // Light gray and darker gray
+
+                HeartRateItem(reading, backgroundColor)
             }
         }
 
@@ -207,12 +211,12 @@ fun HealthConnectApp(healthConnectClient: HealthConnectClient) {
 }
 
 @Composable
-fun HeartRateItem(reading: HeartRateRecord) {
+fun HeartRateItem(reading: HeartRateRecord, backgroundColor: Color) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 4.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+        colors = CardDefaults.cardColors(containerColor = backgroundColor)
     ) {
         Column(
             modifier = Modifier.padding(16.dp)
