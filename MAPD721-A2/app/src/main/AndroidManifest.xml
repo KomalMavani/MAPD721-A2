@@ -2,8 +2,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.READ_HEALTH_DATA"/>
-    <uses-permission android:name="android.permission.WRITE_HEALTH_DATA"/>
+    <uses-permission android:name="android.permission.health.HEART_RATE_WRITE"/>
+    <uses-permission android:name="android.permission.health.READ_HEART_RATE"/>
+    <uses-permission android:name="android.permission.health.WRITE_HEART_RATE"/>
+    <uses-permission android:name="android.permission.health.READ_STEPS"/>
+    <uses-permission android:name="android.permission.health.WRITE_STEPS"/>
+    <uses-permission android:name="android.permission.health.READ_HEART_RATE"/>
+    <uses-permission android:name="android.permission.health.WRITE_HEART_RATE"/>
+    <uses-permission android:name="android.permission.health.READ_STEPS"/>
+    <uses-permission android:name="android.permission.health.WRITE_STEPS"/>
+    <uses-permission android:name="android.permission.WRITE_HEALTH_RECORDS" />
+    <uses-permission android:name="android.permission.READ_HEALTH_RECORDS" />
+    <uses-permission android:name="android.PERMISSION_WRITE_HEART_RATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -24,6 +36,10 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+
+                <!-- If managing health permissions, this could be relevant -->
+                <action android:name="android.intent.action.VIEW_PERMISSION_USAGE"/>
+                <category android:name="android.intent.category.HEALTH_PERMISSIONS"/>
             </intent-filter>
         </activity>
     </application>
