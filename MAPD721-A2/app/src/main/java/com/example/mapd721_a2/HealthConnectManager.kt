@@ -1,17 +1,7 @@
 package com.example.mapd721_a2
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.health.connect.client.HealthConnectClient
-import androidx.health.connect.client.permission.HealthPermission
 import androidx.health.connect.client.records.HeartRateRecord
 import androidx.health.connect.client.request.ReadRecordsRequest
 import androidx.health.connect.client.time.TimeRangeFilter
@@ -20,14 +10,9 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import java.time.*
 import java.time.format.DateTimeFormatter
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
-
-import androidx.lifecycle.lifecycleScope
-import androidx.compose.ui.platform.LocalContext
 
 
-class HealthViewModel : ViewModel() {
+class HealthConnectManager : ViewModel() {
     private var healthConnectClient: HealthConnectClient? = null
     private var _readings = mutableStateOf<List<HeartRateRecord>>(emptyList())
     val readings: State<List<HeartRateRecord>> = _readings

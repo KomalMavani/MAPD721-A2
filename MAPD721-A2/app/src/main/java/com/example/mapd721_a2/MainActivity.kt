@@ -44,6 +44,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.lifecycle.lifecycleScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
 
 class MainActivity : ComponentActivity() {
     private lateinit var healthConnectClient: HealthConnectClient
@@ -84,7 +85,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun HealthConnectApp(healthConnectClient: HealthConnectClient) {
-    val viewModel = androidx.lifecycle.viewmodel.compose.viewModel<HealthViewModel>()
+    val viewModel = androidx.lifecycle.viewmodel.compose.viewModel<HealthConnectManager>()
     var heartRate by remember { mutableStateOf("") }
     var dateTime by remember { mutableStateOf("") }
     val readings by viewModel.readings
@@ -173,7 +174,7 @@ fun HealthConnectApp(healthConnectClient: HealthConnectClient) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // History Section
+        // History
         Text("Heartrate History", style = MaterialTheme.typography.titleMedium)
 
         LazyColumn(
@@ -183,29 +184,35 @@ fun HealthConnectApp(healthConnectClient: HealthConnectClient) {
         ) {
             itemsIndexed(readings) { index, reading ->
                 // Alternate colors based on even or odd index
-                val backgroundColor = if (index % 2 == 0) Color(0xFFFFF176) else Color(0xFFA5D6A7) // Light gray and darker gray
-
+                val backgroundColor = if (index % 2 == 0) Color(0xFFF9F9C4) else Color(0xFFC8E6C9) // Light yellow and light green
                 HeartRateItem(reading, backgroundColor)
             }
         }
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // About Section at the top
+        // About Info
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(Color(0xFFF1F1F1))
-                .padding(vertical = 20.dp),
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+                .background(Color(0xFFF1F1F1)) // Light grey background
+                .padding(vertical = 20.dp)
         ) {
             Column(
                 modifier = Modifier.padding(16.dp)
             ) {
-                Text("Student Name: Komal Mavani")
-                Text("Student ID: 301472922")
-            }
+                Text(
+                    "Student Name: Komal Mavani",
+                    style = MaterialTheme.typography.bodyLarge.copy(fontSize = 20.sp) // Larger font size
+                )
 
+                Spacer(modifier = Modifier.height(5.dp))
+
+                Text(
+                    "Student ID: 301472922",
+                    style = MaterialTheme.typography.bodyMedium.copy(fontSize = 18.sp) // Slightly smaller font size
+                )
+            }
         }
     }
 }
